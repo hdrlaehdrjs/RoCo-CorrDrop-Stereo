@@ -1,0 +1,4 @@
+# Random-key dropout control (see track2_croco_abl_randkey_s1), seed 2027 = seed of the second Full run.
+inherit: track2_croco_abl_randkey_s1
+name: track2_croco_abl_randkey_s2
+seed: 2027

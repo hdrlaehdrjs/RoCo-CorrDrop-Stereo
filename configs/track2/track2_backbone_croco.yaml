@@ -1,0 +1,13 @@
+# CroCo-Stereo ViT-L encoder / Base decoder (official recipe values where applicable).
+backbone: croco
+init_checkpoint: checkpoints/track2/croco_clean_teacher.pt
+teacher_checkpoint: checkpoints/track2/croco_clean_teacher.pt
+crop: [352, 704]            # official CroCo-Stereo crop
+batch_size: 6               # official batch size
+lr: 1.0e-5
+lr_encoder_scale: 0.1
+weight_decay: 0.05          # official
+betas: [0.9, 0.95]          # official
+grad_clip: null            # official CroCo recipe does not clip
+inference: {overlap: 0.7}
+corrmask: {provider: croco_attention, attn_blocks: [-1]}

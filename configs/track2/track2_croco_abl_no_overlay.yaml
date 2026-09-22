@@ -1,0 +1,4 @@
+# Ablation: final recipe without sensor overlays: all weather masks world-locked (disparity transport).
+inherit: track2_croco_final_base
+name: track2_croco_abl_no_overlay
+s2aug: {p_overlay: 0.0}

@@ -1,0 +1,5 @@
+# Repeat of the no-correspondence-dropout ablation with the alternate seed of the second Full run (2027).
+# Identical to track2_croco_abl_no_dropout (= full config with corrdrop.p = 0) except the seed.
+inherit: track2_croco_abl_no_dropout
+name: track2_croco_abl_no_dropout_seed2
+seed: 2027

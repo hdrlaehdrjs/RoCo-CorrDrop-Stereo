@@ -1,0 +1,4 @@
+inherit: track2_croco_base
+name: track2_croco_e4_anchor
+s2aug: {mask_strategy: corrmask}
+loss: {lambda_delta: 0.1, lambda_anchor: 0.1}

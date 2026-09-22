@@ -1,0 +1,6 @@
+{
+  "seed": 1234,
+  "validation_scenes": ["0038", "0039", "0041", "0043", "0044", "0045", "0047"],
+  "samples_per_scene": 7,
+  "notes": "Scene-disjoint fixed holdout. 49 temporal pairs total; no validation scene is used for DEFOM fine-tuning."
+}

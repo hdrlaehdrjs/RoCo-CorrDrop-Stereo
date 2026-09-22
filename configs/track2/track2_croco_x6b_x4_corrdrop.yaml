@@ -1,0 +1,13 @@
+# Robust twin training + correspondence dropout + sensor overlays (the full model without the monocular head).
+# Correspondence dropout: for a random rectangular region of left tokens (5-30 % of the 22x44 grid, p = 0.5 per corrupted sample) the keys
+#     within +-1 token row of the query row are masked in EVERY decoder cross-attention, so the true match is
+#     unavailable and L_corr / L_delta must be met from context. Training only; inference is the unchanged network.
+# Sensor overlays: 30 % of weather events put the mask on both views as a sensor overlay (identical pixels = zero-parallax
+#     distractor, or independent per view) instead of the world-locked disparity transport.
+# 7 generic corruption families in training: fog / frost / speckle / zoom / elastic stay unseen.
+inherit: track2_croco_x4_robust_from_start
+name: track2_croco_x6b_x4_corrdrop
+micro_batch: 1
+care: {variant: dropout, block: 0, blocks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], drop_band: 1}
+corrdrop: {p: 0.5, area: [0.05, 0.3]}
+s2aug: {p_overlay: 0.3, p_overlay_same: 0.5}

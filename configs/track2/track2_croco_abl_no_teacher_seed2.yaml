@@ -1,0 +1,6 @@
+# Repeat of the no-teacher ablation (no L_anchor, uniform L_delta weights, GT-based CorrMask placement; the frozen
+# teacher is not loaded at all) with seed 2027 (seed of the second Full run). Identical to track2_croco_abl_no_teacher
+# except the seed.
+inherit: track2_croco_abl_no_teacher
+name: track2_croco_abl_no_teacher_seed2
+seed: 2027

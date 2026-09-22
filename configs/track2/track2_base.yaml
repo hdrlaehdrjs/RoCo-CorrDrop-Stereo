@@ -1,0 +1,29 @@
+# Shared base settings (backbone-agnostic).
+inherit: track2_backbone_defom
+seed: 2026
+steps: 4054                 # full schedule: 2 epochs of 4054 train frames at batch 2 (DEFOM)
+warmup_steps: 50
+schedule: cosine
+save_every: 1000
+workers: 6
+trainable: decoder_head     # encoder frozen unless overridden
+s2aug:
+  p_aug: 0.7                # Track 3 Q4Aug values
+  severity: [0.15, 0.75]
+  mode: stereo_shared
+  transport: zbuffer
+  p_mask: 0.25
+  p_world: 0.55
+  mask_strategy: none
+  warmup_frac: 0.1          # curriculum: low probability / mild severity first 10 %
+loss:
+  lambda_clean: 1.0
+  lambda_corr: 0.5
+  lambda_delta: 0.0
+  lambda_anchor: 0.0
+  lambda_feat: 0.0
+  ramp_frac: 0.1            # lambda_corr / lambda_delta ramp; anchor constant
+  delta_weight: teacher
+  tau_delta: 1.0
+  tau_anchor: 1.0
+  anchor_w_min: 0.0

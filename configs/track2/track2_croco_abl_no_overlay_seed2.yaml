@@ -1,0 +1,4 @@
+# Second seed of the no_overlay ablation (the full model has two seeds; differences below the seed spread are not claims).
+inherit: track2_croco_abl_no_overlay
+name: track2_croco_abl_no_overlay_seed2
+seed: 2027

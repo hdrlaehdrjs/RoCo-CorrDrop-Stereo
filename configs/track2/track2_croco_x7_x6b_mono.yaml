@@ -1,0 +1,8 @@
+# Full model: robust twin training + correspondence dropout + sensor overlays + monocular fallback head (track2/mono.py):
+#   a second DPT head on the LEFT encoder tokens (blocks 5/11/17/23), fused per pixel with the stereo prediction,
+#   d = w * d_stereo + (1 - w) * d_mono, w = sigmoid(conv(f) + 6) (0.9975 at init), own Laplacian loss lambda_mono.
+# Refinenet / output convs copied from the stereo head; mono head + fuser train at 10 x the base LR; the mono head reads
+# detached encoder tokens (its O(100) initial Laplacian loss never back-propagates into the shared encoder).
+inherit: track2_croco_x6b_x4_corrdrop
+name: track2_croco_x7_x6b_mono
+mono: {hooks: [5, 11, 17, 23], fuse_hidden: 16, fuse_bias_init: 6.0, init_from_stereo_head: true, lambda_mono: 0.5, lr_scale: 10}

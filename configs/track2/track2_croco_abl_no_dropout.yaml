@@ -1,0 +1,4 @@
+# Ablation: final recipe without correspondence dropout.
+inherit: track2_croco_final_base
+name: track2_croco_abl_no_dropout
+corrdrop: {p: 0.0}

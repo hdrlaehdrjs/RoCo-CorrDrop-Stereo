@@ -1,0 +1,5 @@
+# Repeat of the image-plane mask transport ablation with seed 2027 (seed of the second Full run).
+# Identical to track2_croco_abl_image_plane except the seed.
+inherit: track2_croco_abl_image_plane
+name: track2_croco_abl_image_plane_seed2
+seed: 2027

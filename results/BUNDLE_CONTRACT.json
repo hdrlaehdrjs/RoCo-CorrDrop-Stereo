@@ -1,0 +1,46 @@
+{
+  "clean": {
+    "file": "/DLMATH/KDG/Image/Roco_track2/submissions/track2/final_x7/bundle/clean/disp1_submission.hdf5",
+    "bytes": 148256241,
+    "sha256": "8ffa052dabeae42da9c5d96c600684b820f07b3039269ebac3e26c900b7b3f68",
+    "shape": [
+      124414000
+    ],
+    "dtype": "float16"
+  },
+  "robust": {
+    "file": "/DLMATH/KDG/Image/Roco_track2/submissions/track2/final_x7/bundle/robust/disp1_robustness.hdf5",
+    "bytes": 168569173,
+    "sha256": "ceb2c2e6611e5f3d31eaee06e227fb4f9cd9a6a11be396c950c78101e0b67c2b",
+    "groups": 21,
+    "per_group_shape": [
+      5183900
+    ],
+    "dtype": "float16"
+  },
+  "inference_contract": {
+    "checkpoint": "outputs/track2/track2_croco_final_submit/stageC_seed2026/final.pt",
+    "checkpoint_sha256": "3e579178890b89f6d323da6a509cf61b116730537e3fe78c740c6d57112f1d42",
+    "tile_crop": [
+      352,
+      704
+    ],
+    "overlap": 0.7,
+    "tile_batch": 1,
+    "amp": "none (fp32)",
+    "tile_conf_mode": "conf_expsigmoid_15_3",
+    "care": null,
+    "mono": {
+      "hooks": [
+        5,
+        11,
+        17,
+        23
+      ],
+      "fuse_hidden": 16,
+      "fuse_bias_init": 6.0,
+      "init_from_stereo_head": true,
+      "detach_tokens": true
+    }
+  }
+}

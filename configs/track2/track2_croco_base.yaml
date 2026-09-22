@@ -1,0 +1,18 @@
+# CroCo-Stereo base settings: 2 epochs of 4054 frames = 8108 pairs -> 1351 steps x batch 6.
+inherit: track2_base
+backbone: croco
+init_checkpoint: checkpoints/track2/croco_clean_teacher.pt
+teacher_checkpoint: checkpoints/track2/croco_clean_teacher.pt
+crop: [352, 704]
+batch_size: 6
+micro_batch: 3              # gradient accumulation 2 x 3 (shared-GPU memory)
+steps: 1351
+warmup_steps: 17            # same 1.2 % warmup fraction as DEFOM (50 / 4054)
+save_every: 338
+lr: 1.0e-5                  # decoder/head LR for adaptation from the converged E0 (1/3 of official fine-tune LR)
+lr_encoder_scale: 0.1
+weight_decay: 0.05
+betas: [0.9, 0.95]
+grad_clip: null
+inference: {overlap: 0.7}
+corrmask: {provider: croco_attention, attn_blocks: [-1], tau: 1.0}

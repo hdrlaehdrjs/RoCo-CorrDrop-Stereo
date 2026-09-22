@@ -1,0 +1,7 @@
+# CONTROL for correspondence dropout: budget-matched RANDOM-key dropout. Identical to the full config (same query
+# region Omega, p = 0.5, corrupted branch only, all heads, all 12 decoder cross-attention layers) except that, for every
+# dropped query, the keys hidden are drawn uniformly without replacement from all right-view keys instead of the
+# +-1-row epipolar band; the number of hidden keys per query equals the band's (132 interior rows, 88 border rows).
+inherit: track2_croco_final_base
+name: track2_croco_abl_randkey_s1
+corrdrop: {keys: random}

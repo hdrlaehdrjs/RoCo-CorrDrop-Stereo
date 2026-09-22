@@ -1,0 +1,20 @@
+# E0 (CroCo path): official CroCo-Stereo Spring fine-tune recipe, restricted to the scene-disjoint
+# Track 2 train split (the released Spring model saw the validation scenes).
+inherit: track2_backbone_croco
+name: track2_e0_croco_clean
+init_checkpoint: checkpoints/croco_official/crocostereo.pth
+teacher_checkpoint: null
+seed: 2026
+steps: 5405                 # 8 epochs x 676 steps (4054 frames / batch 6), official: --epochs 8
+batch_size: 6
+lr: 3.0e-5                  # official
+warmup_steps: 676           # official warmup_epochs 1
+schedule: cosine
+geometry: croco_official
+twin: false
+trainable: full
+workers: 6
+micro_batch: 2              # gradient accumulation 3 x 2 = official batch 6 (shared-GPU memory limit)
+save_every: 676
+s2aug: {p_aug: 0.0, mask_strategy: none}
+loss: {lambda_clean: 1.0, lambda_corr: 0.0, lambda_delta: 0.0, lambda_anchor: 0.0, lambda_feat: 0.0}

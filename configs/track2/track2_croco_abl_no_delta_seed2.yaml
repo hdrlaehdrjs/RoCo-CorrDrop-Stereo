@@ -1,0 +1,5 @@
+# Repeat of the no-L_delta ablation with the alternate seed of the second Full run (2027).
+# Identical to track2_croco_abl_no_delta (= full config with loss.lambda_delta = 0) except the seed.
+inherit: track2_croco_abl_no_delta
+name: track2_croco_abl_no_delta_seed2
+seed: 2027

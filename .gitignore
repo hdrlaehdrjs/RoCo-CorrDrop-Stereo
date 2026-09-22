@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+# large / licensed artefacts are never committed (see README setup)
+checkpoints/
+outputs/
+submissions/
+third_party/croco/
+*.pt
+*.pth
+*.hdf5
+*.npz

@@ -1,0 +1,13 @@
+# Robust twin training built into the official 8-epoch CroCo-Stereo Spring recipe from the public checkpoint
+# (full model, official augmentation / LR / schedule / batch), twin S2Aug + CorrMask + Delta + Anchor.
+# Teacher = clean-finetuned CroCo-Stereo E0 (scene-disjoint, official recipe) for the clean anchor and CorrMask confidence.
+inherit: track2_croco_x2_e4_fix
+name: track2_croco_x4_robust_from_start
+init_checkpoint: checkpoints/croco_official/crocostereo.pth
+teacher_checkpoint: checkpoints/track2/croco_clean_teacher.pt
+trainable: full
+steps: 5405
+warmup_steps: 676
+lr: 3.0e-5
+save_every: 676
+micro_batch: 2

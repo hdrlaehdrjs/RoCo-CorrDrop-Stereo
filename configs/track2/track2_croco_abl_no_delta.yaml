@@ -1,0 +1,4 @@
+# Ablation: final recipe without L_delta (twin consistency); corrupt branch supervised by GT only.
+inherit: track2_croco_final_base
+name: track2_croco_abl_no_delta
+loss: {lambda_delta: 0.0}

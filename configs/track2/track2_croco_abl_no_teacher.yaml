@@ -1,0 +1,5 @@
+# Ablation: final recipe without the frozen teacher: no L_anchor, uniform L_delta weights, GT-based CorrMask placement.
+inherit: track2_croco_final_base
+name: track2_croco_abl_no_teacher
+loss: {lambda_anchor: 0.0, delta_weight: valid}
+corrmask: {provider: gt_priority}

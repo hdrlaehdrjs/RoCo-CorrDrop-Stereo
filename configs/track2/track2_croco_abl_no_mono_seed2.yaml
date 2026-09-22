@@ -1,0 +1,4 @@
+# Second seed of the no_mono ablation (the full model has two seeds; differences below the seed spread are not claims).
+inherit: track2_croco_abl_no_mono
+name: track2_croco_abl_no_mono_seed2
+seed: 2027

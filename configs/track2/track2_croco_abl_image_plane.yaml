@@ -1,0 +1,5 @@
+# Ablation: weather / CorrMask masks copied to the right view at the same pixels instead of the z-buffer disparity
+# transport (stereo-geometry consistency of the occluders).
+inherit: track2_croco_final_base
+name: track2_croco_abl_image_plane
+s2aug: {transport: image_plane}

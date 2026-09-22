@@ -1,0 +1,7 @@
+# Full model with twice the training length (16 epochs = 10810 steps of 4054 pairs at batch 6); everything else identical.
+# Tests whether the robustness terms (ramped in over the first 10 %) benefit from a longer schedule.
+inherit: track2_croco_x7_x6b_mono
+name: track2_croco_x7_16ep
+steps: 10810
+warmup_steps: 676
+save_every: 1351

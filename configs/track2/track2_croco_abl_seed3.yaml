@@ -1,0 +1,4 @@
+# Third seed of the full model (seed 2028).
+inherit: track2_croco_final_base
+name: track2_croco_abl_seed3
+seed: 2028

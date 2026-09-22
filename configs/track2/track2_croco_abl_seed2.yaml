@@ -1,0 +1,4 @@
+# Ablation: final recipe, second seed (variance check).
+inherit: track2_croco_final_base
+name: track2_croco_abl_seed2
+seed: 2027

@@ -1,0 +1,3 @@
+# Base of all ablation configs: the full model.
+inherit: track2_croco_x7_x6b_mono
+name: track2_croco_final_base

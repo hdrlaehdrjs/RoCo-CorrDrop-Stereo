@@ -1,0 +1,14 @@
+variant,seed,clean_abs,clean_d1,dabs20,fog,frost,snow,motion_blur,source
+Full,2026,0.2865,0.5595,0.6555,4.2883,1.1515,0.5487,0.6915,outputs/track2/eval/r20_croco_X7
+Full,2027,0.2857,0.5586,0.7830,6.5797,0.8606,0.7044,0.6915,outputs/track2/eval/r20_croco_ABLseed2
+Full,2028,0.2874,0.5554,0.5704,3.0613,0.7620,0.5188,0.6898,outputs/track2/eval/r20_croco_ABLseed3
+Full,mean,0.2865,0.5578,0.6696,4.6431,0.9247,0.5907,0.6909,
+Full,sd,0.0008,0.0022,0.1070,1.7859,0.2025,0.0996,0.0010,
+image-plane transport,2026,0.2911,0.5508,0.8578,6.2402,1.9255,1.0962,0.8542,outputs/track2/eval/r20_croco_ABLimageplane
+image-plane transport,2027,0.2875,0.5576,0.8801,7.0455,1.1434,0.8475,0.8466,outputs/track2/final_runs/image_plane_seed2027/eval/robust20
+image-plane transport,mean,0.2893,0.5542,0.8689,6.6428,1.5344,0.9718,0.8504,
+image-plane transport,sd,0.0025,0.0049,0.0157,0.5695,0.5530,0.1758,0.0054,
+no teacher / anchor,2026,0.3170,0.6749,0.9206,5.7309,2.9939,1.3927,0.8700,outputs/track2/eval/r20_croco_ABLnoteacher
+no teacher / anchor,2027,0.3014,0.5998,0.7378,4.6034,2.0032,0.6676,0.8053,outputs/track2/final_runs/no_teacher_seed2027/eval/robust20
+no teacher / anchor,mean,0.3092,0.6374,0.8292,5.1672,2.4986,1.0302,0.8377,
+no teacher / anchor,sd,0.0110,0.0531,0.1293,0.7973,0.7005,0.5127,0.0457,

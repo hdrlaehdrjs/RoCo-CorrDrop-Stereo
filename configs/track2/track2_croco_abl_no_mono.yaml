@@ -1,0 +1,4 @@
+# Ablation: final recipe without the mono fallback head (stereo branch only).
+inherit: track2_croco_final_base
+name: track2_croco_abl_no_mono
+mono: null

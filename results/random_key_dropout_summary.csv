@@ -1,0 +1,14 @@
+variant,seed,clean_abs,clean_d1,dabs20,fog,frost,snow,motion_blur,source
+Full,2026,0.2865,0.5595,0.6555,4.2883,1.1515,0.5487,0.6915,outputs/track2/eval/r20_croco_X7
+Full,2027,0.2857,0.5586,0.7830,6.5797,0.8606,0.7044,0.6915,outputs/track2/eval/r20_croco_ABLseed2
+Full,2028,0.2874,0.5554,0.5704,3.0613,0.7620,0.5188,0.6898,outputs/track2/eval/r20_croco_ABLseed3
+Full,mean,0.2865,0.5578,0.6696,4.6431,0.9247,0.5907,0.6909,
+Full,sd,0.0008,0.0022,0.1070,1.7859,0.2025,0.0996,0.0010,
+no correspondence dropout,2026,0.2896,0.5555,0.8941,8.6656,1.2487,0.5793,0.8403,outputs/track2/eval/r20_croco_ABLnodropout
+no correspondence dropout,2027,0.2832,0.5548,0.8385,6.5747,2.2927,0.6367,1.1532,outputs/track2/final_runs/no_dropout_seed2/eval/robust20
+no correspondence dropout,mean,0.2864,0.5551,0.8663,7.6202,1.7707,0.6080,0.9968,
+no correspondence dropout,sd,0.0046,0.0005,0.0393,1.4785,0.7383,0.0406,0.2212,
+random-key dropout (control),2026,0.2900,0.5708,1.3846,13.0409,4.3766,1.6661,1.3146,outputs/track2/final_runs/randkey_seed2026/eval/robust20
+random-key dropout (control),2027,0.2807,0.5516,1.0608,10.7346,2.9047,0.5376,0.8520,outputs/track2/final_runs/randkey_seed2027/eval/robust20
+random-key dropout (control),mean,0.2854,0.5612,1.2227,11.8878,3.6407,1.1018,1.0833,
+random-key dropout (control),sd,0.0066,0.0136,0.2290,1.6308,1.0408,0.7979,0.3271,

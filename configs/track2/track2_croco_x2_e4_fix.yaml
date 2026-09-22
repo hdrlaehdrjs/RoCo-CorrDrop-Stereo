@@ -1,0 +1,7 @@
+# Twin training structure (S2Aug + CorrMask + L_delta + L_anchor) with CroCo-scaled loss weights.
+inherit: track2_croco_e4_anchor
+name: track2_croco_x2_e4_fix
+geometry: croco_official
+lr: 2.0e-6
+loss: {lambda_corr: 0.25, lambda_delta: 1.0, lambda_anchor: 0.1}
+corrmask: {provider: teacher_confidence}

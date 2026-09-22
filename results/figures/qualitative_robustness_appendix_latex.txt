@@ -1,0 +1,16 @@
+% Requires \usepackage{graphicx}. Copy qualitative_robustness_appendix.pdf next to the .tex file (or adjust the path).
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{qualitative_robustness_appendix.pdf}
+  \caption{\textbf{Qualitative robustness analysis on held-out corruptions.}
+  For each example we show the clean left image, the corrupted input, and the corruption-induced disparity drift
+  $|\Delta d| = |d_{\mathrm{corr}} - d_{\mathrm{clean}}|$ of the clean-only baseline (E0) and of the full model;
+  this is a prediction change, not an error with respect to ground truth.
+  Both drift maps use the same colour scale (clipped at 50\,px); the insets give the image mean and the sky-region mean of $|\Delta d|$.
+  Large baseline changes are concentrated in evidence-poor regions such as sky and low-texture areas, often in
+  blocks aligned with the inference tiles, whereas the full model substantially reduces these failures under fog,
+  frost, and snow. Fog, frost and snow are never seen during training. Residual drift of the full model remains visible in the fogged sky (top row).
+  Examples correspond to fog scene 0038/frame 0072, frost scene 0045/frame 0066, and snow scene 0047/frame 0222,
+  all at severity 3.}
+  \label{fig:qualitative_robustness_appendix}
+\end{figure*}

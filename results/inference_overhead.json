@@ -1,0 +1,59 @@
+{
+ "device": "NVIDIA L40S",
+ "precision": "fp32",
+ "batch": 1,
+ "tile": [
+  352,
+  704
+ ],
+ "warmup_tile": 20,
+ "note": "A and B are timed in alternating blocks on the same GPU",
+ "per_tile": {
+  "stereo_only": {
+   "mean_ms": 119.8636024305597,
+   "median_ms": 129.30331309325993,
+   "std_ms": 23.84823284128101,
+   "p95_ms": 129.7987693338655,
+   "n": 100
+  },
+  "full": {
+   "mean_ms": 130.55447294842452,
+   "median_ms": 138.16830748692155,
+   "std_ms": 22.595560503821357,
+   "p95_ms": 138.81787001155317,
+   "n": 100
+  }
+ },
+ "full_frame_1080p_tiled": {
+  "stereo_only": {
+   "mean_ms": 6729.902321298141,
+   "median_ms": 6917.084460961632,
+   "std_ms": 451.7863047389973,
+   "p95_ms": 7166.500082833227,
+   "n": 20
+  },
+  "full": {
+   "mean_ms": 7130.881285388023,
+   "median_ms": 7142.415510956198,
+   "std_ms": 518.9636703716754,
+   "p95_ms": 7672.636331757531,
+   "n": 20
+  }
+ },
+ "overhead_percent": {
+  "per_tile_mean": 8.919196737857394,
+  "per_tile_median": 6.855968483396668,
+  "full_frame_median": 3.2576015410290315
+ },
+ "peak_cuda_mem_mib_per_tile": {
+  "stereo_only": 2410.0146484375,
+  "full": 2412.0146484375
+ },
+ "parameters": {
+  "full": 457853365,
+  "mono_and_fuser": 20435475,
+  "stereo_only": 437417890,
+  "increase_percent": 4.671842525690936
+ },
+ "tiles_per_1080p_frame": 56
+}

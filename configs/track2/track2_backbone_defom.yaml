@@ -1,0 +1,13 @@
+# DEFOM-Stereo ViT-S backbone, Track 3 validated stereo training settings.
+backbone: defom
+init_checkpoint: checkpoints/track2/defom_clean_teacher.pth
+teacher_checkpoint: checkpoints/track2/defom_clean_teacher.pth
+crop: [320, 640]            # Track 3 crop
+batch_size: 2               # Track 3 stereo batch
+lr: 3.0e-6                  # Track 3 head LR
+lr_encoder_scale: 0.1       # Track 3 mono-encoder LR ratio
+weight_decay: 1.0e-5
+betas: [0.9, 0.999]
+grad_clip: 1.0
+defom: {train_iters: 8, train_scale_iters: 4, test_iters: 16, test_scale_iters: 6}
+corrmask: {provider: teacher_confidence}

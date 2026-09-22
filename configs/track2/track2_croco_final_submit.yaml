@@ -1,0 +1,13 @@
+# FINAL SUBMISSION MODEL: the final recipe trained on ALL Spring train scenes (4103 pairs = train + local val),
+# starting from the official Spring-finetuned CroCo-Stereo checkpoint, which is also the frozen teacher
+# (it was trained on the same scenes, so it is a valid clean anchor here; it is NOT usable for local validation).
+# Steps = 8 epochs of 4103 pairs at batch 6; everything else identical to final_base. Local metrics of this model
+# are contaminated (val scenes seen) and must not be reported as validation.
+inherit: track2_croco_final_base
+name: track2_croco_final_submit
+train_split: train_all
+init_checkpoint: checkpoints/croco_official/crocostereo_finetune_spring.pth
+teacher_checkpoint: checkpoints/croco_official/crocostereo_finetune_spring.pth
+steps: 5471
+warmup_steps: 684
+save_every: 684
