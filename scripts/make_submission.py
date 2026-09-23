@@ -35,9 +35,10 @@ import h5py
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
+WORK = Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT))
 sys.path.insert(0, str(ROOT))
-DATA = Path(__import__("os").environ.get("ROCO_DATA", "/DLMATH/Data/roco"))
-TOOLS = Path(__import__("os").environ.get("ROCO_SUBSAMPLING_TOOLS", "/DLMATH/KDG/Image/Roco/tools/spring_subsampling/subsampling_tools"))
+DATA = Path(__import__("os").environ.get("ROCO_DATA", WORK / "data"))
+TOOLS = Path(__import__("os").environ.get("ROCO_SUBSAMPLING_TOOLS", WORK / "third_party/subsampling_tools"))
 CORRUPTIONS = ["brightness", "contrast", "defocus_blur", "elastic_transform", "fog", "frost", "gaussian_blur", "gaussian_noise",
                "glass_blur", "impulse_noise", "jpeg_compression", "motion_blur", "pixelate", "rain", "saturate", "shot_noise",
                "snow", "spatter", "speckle_noise", "zoom_blur"]

@@ -1,8 +1,8 @@
 """Q4Aug / CorrMask primitives VENDORED VERBATIM from Track 3.
 
-Source: /DLMATH/KDG/Image/Roco/scripts/corresguard_core.py (functions _photo_params,
+Source: Track 3 entry, scripts/corresguard_core.py (functions _photo_params,
 _photo, _degrade, weather_mask, forward_splat_mask, _overlay, _priority_mask) and
-/DLMATH/KDG/Image/Roco/scripts/paper_ablation_aug.py (random_mask).
+scripts/paper_ablation_aug.py (random_mask).
 
 Why vendored instead of imported: importing corresguard_core executes
 `import track3_defom_dpflow`, which imports DEFOM-Stereo and ptlflow/DPFlow. Track 2

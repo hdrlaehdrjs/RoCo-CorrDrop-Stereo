@@ -12,9 +12,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = Path(os.environ.get("ROCO_TRACK2_WORK", ROOT))
-TRACK3_ROOT = Path(os.environ.get("ROCO_TRACK3_ROOT", "/DLMATH/KDG/Image/Roco"))
+TRACK3_ROOT = Path(os.environ.get("ROCO_TRACK3_ROOT", WORK / "third_party/track3"))
 CROCO_ROOT = Path(os.environ.get("ROCO_CROCO_ROOT", WORK / "third_party/croco"))
-SPRING = Path(os.environ.get("ROCO_SPRING", "/DLMATH/Data/roco/spring"))
+SPRING = Path(os.environ.get("ROCO_SPRING", WORK / "data/spring"))
 OFFICIAL_CKPT = WORK / "checkpoints/croco_official"
 TRACK2_CKPT = WORK / "checkpoints/track2"
 OUTPUTS = WORK / "outputs/track2"

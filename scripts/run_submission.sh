@@ -9,8 +9,8 @@ CK=$1; NAME=$2; GPUS=($3); N=${#GPUS[@]}
 SUB=$W/submissions/track2/$NAME; RAW=$SUB/raw; LOG=$SUB/logs; ST=$W/outputs/track2/pipeline_status.txt
 mkdir -p $RAW $LOG
 echo "$(date '+%F %T') [submission] $NAME start: ckpt=$CK gpus=${GPUS[*]}" | tee -a $ST
-free_kib=$(df -Pk /DLMATH | awk 'NR==2 {print $4}')
-if (( free_kib < 250 * 1024 * 1024 )); then echo "less than 250 GiB free on /DLMATH; aborting" | tee -a $ST; exit 2; fi
+free_kib=$(df -Pk "$W" | awk 'NR==2 {print $4}')
+if (( free_kib < 250 * 1024 * 1024 )); then echo "less than 250 GiB free on $W; aborting" | tee -a $ST; exit 2; fi
 pids=()
 for i in "${!GPUS[@]}"; do
   CUDA_VISIBLE_DEVICES=${GPUS[$i]} python3 -u scripts/make_submission.py predict --checkpoint $CK --root $RAW --worker $i/$N > $LOG/predict_w$i.log 2>&1 &

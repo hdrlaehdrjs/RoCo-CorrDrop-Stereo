@@ -5,7 +5,7 @@ import pytest
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
-T3 = Path(__import__("os").environ.get("ROCO_TRACK3_ROOT", "/DLMATH/KDG/Image/Roco"))
+T3 = Path(__import__("os").environ.get("ROCO_TRACK3_ROOT", Path(__file__).resolve().parents[1] / "third_party/track3"))
 sys.path.insert(0, str(ROOT))
 from track2.config import load_config  # noqa: E402
 

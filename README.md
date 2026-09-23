@@ -47,6 +47,7 @@ git clone https://github.com/naver/croco third_party/croco && git -C third_party
 mkdir -p checkpoints/croco_official                                                   # official CroCo-Stereo weights (see CroCo README)
 #   crocostereo.pth                  sha256 8b48935772c98714db1a18773d687da273d3ab721410cc5e398451a0dac8982f
 #   crocostereo_finetune_spring.pth  sha256 123273a722a58134c6816efe5122c427815c92f82896be4d484e6d21b52da575
+# defaults (relative to this folder): data/spring, data/, third_party/subsampling_tools, third_party/croco
 export ROCO_SPRING=/path/to/spring            # contains train/ and test/
 export ROCO_DATA=/path/to/roco                # spring/ + RobustSpring test corruptions (submission only)
 export ROCO_SUBSAMPLING_TOOLS=/path/to/subsampling_tools   # official Spring binaries (submission only)
