@@ -127,7 +127,7 @@ The final appendix figure itself is committed in `results/figures/`.
 
 ## 5. Results
 Official [Spring stereo benchmark](https://spring-benchmark.org/stereo) entry **RoCo-19-CorrDrop-Stereo**
-(rank 1 as of 2026-09-23; model `track2_croco_final_submit`):
+(model `track2_croco_final_submit`):
 
 | Abs | 1px | D1 |
 |---|---|---|
