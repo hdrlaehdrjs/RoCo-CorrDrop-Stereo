@@ -126,8 +126,22 @@ fusion-weight / latency analyses and the qualitative figures need model predicti
 The final appendix figure itself is committed in `results/figures/`.
 
 ## 5. Results
-Official leaderboard (RoCo-19-CorrDrop-Stereo): clean Abs 0.457 / 1px 7.095 / D1 2.615; robustness ΔAbs 1.441 / Δ1px 18.088 /
-ΔD1 1.909. Local protocol (28 primary frames, 20 corruptions, mean ΔAbs; mean ± sample sd over seeds):
+Official [Spring stereo benchmark](https://spring-benchmark.org/stereo) entry **RoCo-19-CorrDrop-Stereo**
+(model `track2_croco_final_submit`):
+
+| Abs | 1px | D1 |
+|---|---|---|
+| 0.457 | 7.095 | 2.615 |
+
+Robustness columns of the same leaderboard:
+
+| ΔAbs | Δ1px | ΔD1 |
+|---|---|---|
+| 1.441 | 18.088 | 1.909 |
+
+See the leaderboard for the per-region breakdown and metric definitions.
+
+Local protocol (28 primary validation frames, 20 corruptions, mean ΔAbs; mean ± sample sd over seeds):
 
 | variant | seeds | ΔAbs | clean Abs |
 |---|---|---|---|
