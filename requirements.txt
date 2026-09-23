@@ -1,0 +1,17 @@
+# Python 3.11. Versions are those of the environment that produced the paper results.
+# PyTorch is installed separately for your CUDA version, e.g. (CUDA 11.8):
+#   pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu118
+# imagecorruptions==1.1.2 is also needed (only for its frost texture images, used by track2/robust20.py); install it
+# with --no-deps so that it does not pull in opencv-python next to opencv-python-headless:
+#   pip install --no-deps imagecorruptions==1.1.2
+numpy==2.2.6
+scipy==1.17.1
+scikit-image==0.26.0
+opencv-python-headless==4.13.0.92
+pillow==11.0.0
+h5py==3.16.0
+PyYAML==6.0.2
+timm==1.0.28
+einops==0.8.2
+matplotlib==3.11.1
+pytest==9.1.1

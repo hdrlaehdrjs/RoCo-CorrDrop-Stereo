@@ -1,0 +1,2 @@
+variant,seed,clean_abs,dabs20,fog,frost,snow,source
+E0 (clean-only baseline / teacher),2026,0.2815,2.1951,16.8014,9.6315,5.8035,outputs/track2/eval/r20_croco_E0

@@ -1,5 +1,9 @@
 """CARE-Stereo: Correspondence-Aware Robust Epipolar Stereo modules for a frozen CroCo-Stereo E0.
 
+The paper's final model uses only variant="dropout" (parameter-free structured correspondence dropout; the
+random-key control uses the same path with an explicit key mask). The other variants are retained as development
+utilities and are not used by the reported final model.
+
 CroCo facts this relies on (third_party/croco, verified):
   * DecoderBlock.forward(x, y, xpos, ypos):
         x = x + attn(norm1(x), xpos)

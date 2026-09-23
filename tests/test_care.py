@@ -1,5 +1,6 @@
 """CARE-Stereo unit tests on a tiny CPU CroCo-Stereo (cosine positional embedding).
-The real E0 (RoPE, ViT-L) parity is checked on GPU by scripts/care_parity_gpu.py."""
+Bit-identity of the patched block with the full ViT-L model was checked on GPU during development (script not part of
+this package); tests/gpu_croco_tiling_parity.py checks the tiled inference against the official CroCo implementation."""
 import random
 import sys
 from pathlib import Path

@@ -10,3 +10,11 @@ third_party/croco/
 *.pth
 *.hdf5
 *.npz
+# local data, credentials and optional third-party checkouts
+data/
+.env
+third_party/subsampling_tools/
+third_party/track3/
+third_party/FoundationStereo/
+*.dsp5
+*.flo5

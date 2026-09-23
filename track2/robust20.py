@@ -15,6 +15,7 @@ calibrated against RobustSpring test images. This is a local proxy, not the offi
 """
 from __future__ import annotations
 
+import importlib.util
 import math
 import random
 from io import BytesIO
@@ -38,7 +39,23 @@ GROUPS20 = {"brightness": "color", "contrast": "color", "saturate": "color",
             "defocus_blur": "blur", "glass_blur": "blur", "motion_blur": "blur", "zoom_blur": "blur", "gaussian_blur": "blur",
             "fog": "weather", "frost": "weather", "snow": "weather", "spatter": "weather", "rain": "weather",
             "elastic_transform": "digital", "pixelate": "digital", "jpeg_compression": "digital"}
-FROST_DIR = Path("/opt/conda/lib/python3.11/site-packages/imagecorruptions/frost")
+_FROST_DIR: Path | None = None
+
+
+def frost_dir() -> Path:
+    """Directory of the frost textures shipped with the `imagecorruptions` package. Located via importlib without
+    importing the package (its own code does not run with numpy 2)."""
+    global _FROST_DIR
+    if _FROST_DIR is None:
+        spec = importlib.util.find_spec("imagecorruptions")
+        if spec is None or spec.origin is None:
+            raise RuntimeError("the frost corruption needs the frost textures of the `imagecorruptions` package: "
+                               "pip install imagecorruptions==1.1.2")
+        d = Path(spec.origin).resolve().parent / "frost"
+        if not d.is_dir():
+            raise RuntimeError(f"imagecorruptions is installed but its frost asset directory is missing: {d}")
+        _FROST_DIR = d
+    return _FROST_DIR
 S = SEVERITY - 1
 
 
@@ -202,7 +219,7 @@ def fog(x, rs, disp=None, sev=SEVERITY, **_):
 def frost(x, rs, sev=SEVERITY, **_):
     a, b = [(1, 0.4), (0.8, 0.6), (0.7, 0.7), (0.65, 0.7), (0.6, 0.75)][sev - 1]
     files = ["frost1.png", "frost2.png", "frost3.png", "frost4.jpg", "frost5.jpg", "frost6.jpg"]
-    f = cv2.imread(str(FROST_DIR / files[int(rs.integers(5))]))
+    f = cv2.imread(str(frost_dir() / files[int(rs.integers(5))]))
     fh, fw = f.shape[:2]
     h, w = x.shape[:2]
     scale = max(h / fh, w / fw, 1.0) * 1.1

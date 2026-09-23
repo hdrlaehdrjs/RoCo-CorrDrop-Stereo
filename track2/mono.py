@@ -8,7 +8,8 @@ Zero-initialised output conv and b = fuse_bias_init (sigmoid(6) = 0.9975): near-
 its own Laplacian loss (lambda_mono in the trainer) so it becomes competent while w is still ~1; every other loss acts
 on the fused output. Parameters live in net.mono (state_dict prefix 'mono.'), so plain checkpoints still load
 strictly; checkpoints saved with a mono head carry ckpt['mono'] and are rebuilt by build_croco_stereo.
-Inference: same single forward; +1 DPT head (~30 M parameters on top of 447 M), no test-time switching.
+Inference: same single forward; the mono head + fuser add 20.4 M parameters (437.4 M -> 457.9 M, +4.7 %;
+results/inference_overhead.md), no test-time switching.
 The mono head only ever sees left-view tokens (encoder hooks < enc_depth), so it cannot use correspondence.
 """
 from __future__ import annotations

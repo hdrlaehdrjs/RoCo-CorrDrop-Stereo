@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: scripts/run_final_repeat.sh <gpu> <config> <outdir name>
+# Usage: scripts/run_train_eval.sh <gpu> <config> <outdir name>
 # Full local training schedule + frozen robust20 evaluation into $W/outputs/track2/final_runs/<name>/ (refuses to overwrite an existing final.pt).
 set -uo pipefail
 cd "$(dirname "$(readlink -f "$0")")/.."; W=${ROCO_TRACK2_WORK:-$PWD}

@@ -222,7 +222,7 @@ class Track2CroCoStereo(nn.Module):
                       tile_batch: int = 8, amp_dtype: torch.dtype | None = None,
                       conf_mode: str | None = None) -> torch.Tensor:
         """Batched re-implementation of stereoflow.engine.tiled_pred (numerically equivalent
-        up to float kernel differences; see tests/test_croco_wrapper.py). Input RGB 0..255 B3HW."""
+        up to float kernel differences; see tests/gpu_croco_tiling_parity.py). Input RGB 0..255 B3HW."""
         conf_mode = conf_mode or self.meta["tile_conf_mode"]
         assert conf_mode.startswith("conf_expsigmoid_")
         beta, betasig = map(float, conf_mode[len("conf_expsigmoid_"):].split("_"))
