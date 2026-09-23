@@ -1,6 +1,6 @@
 # qualitative_robustness_appendix — notes
 
-Figure: 3 rows (fog, frost, snow) x 4 columns (clean left | corrupted left | E0 |Δd| | Full |Δd|).
+Figure: 3 rows (fog, frost, snow) x 4 columns (clean left | corrupted left | clean-only baseline (E0) |Δd| | Full |Δd|).
 Drift map = |d_corrupted − d_clean| of the *same* model (corruption-induced prediction change, NOT a GT error).
 No training, no inference: everything is read from existing files. Regenerate with
 `CUDA_VISIBLE_DEVICES="" python3 scripts/figures/qualitative_robustness_appendix.py figure --vmax 50`

@@ -82,7 +82,7 @@ def cmd_figure(a):
     vmax = a.vmax
     fig = plt.figure(figsize=(13.2, 5.72))
     gs = fig.add_gridspec(3, 5, width_ratios=[1, 1, 1, 1, 0.035], wspace=0.025, hspace=0.035, left=0.032, right=0.945, top=0.94, bottom=0.03)
-    titles = ["Clean", "Corrupted", r"E0 $|\Delta d|$", r"Full $|\Delta d|$"]
+    titles = ["Clean", "Corrupted", r"Clean-only baseline $|\Delta d|$", r"Full $|\Delta d|$"]
     im = None
     for i, d in enumerate(data):
         r = d["r"]
