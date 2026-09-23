@@ -105,5 +105,7 @@ re-implementation (ImageNet-C style + depth-aware fog), not the RobustSpring gen
 run records the sha256 of its sources in `contract.json`. Hardware: NVIDIA L40S (48 GB), ≈ 5 GPU-hours per training run.
 
 ## 7. Licences
+This code is released under **CC BY-NC-SA 4.0** (see `LICENSE`), the licence of CroCo / CroCo-Stereo on which it
+builds (parts of the tiled inference and loss follow the CroCo-Stereo implementation). Non-commercial use only.
 CroCo / CroCo-Stereo: CC BY-NC-SA 4.0 (NAVER) — not redistributed here, fetched by the setup step. Spring / RobustSpring:
 see the dataset terms. `track2/q4_primitives.py` contains augmentation primitives from our Track 3 entry.
