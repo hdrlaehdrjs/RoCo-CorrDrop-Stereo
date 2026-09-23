@@ -4,7 +4,7 @@ from pathlib import Path
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
-WORK = Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT))   # checkpoints/, outputs/, third_party/croco live here
+CROCO = Path(__import__("os").environ.get("ROCO_CROCO_ROOT", Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT)) / "third_party/croco"))
 sys.path.insert(0, str(ROOT))
 from track2 import losses as Ls  # noqa: E402
 from track2.stereo_corrmask import CorrMaskConfig, importance, sample_masks, apply_mask_events  # noqa: E402
@@ -56,7 +56,7 @@ def test_anchor_zero_and_weights_and_no_teacher_grad():
 
 
 def test_croco_native_loss_finite_grads_with_nan_gt():
-    sys.path.insert(0, str(WORK / "third_party/croco"))
+    sys.path.insert(0, str(CROCO))
     from stereoflow.criterion import LaplacianLossBounded2
     gt = gt_field()
     p = torch.rand_like(gt).requires_grad_()

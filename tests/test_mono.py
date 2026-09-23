@@ -5,8 +5,8 @@ from pathlib import Path
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
-WORK = Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT))   # checkpoints/, outputs/, third_party/croco live here
-sys.path[:0] = [str(ROOT), str(WORK / "third_party/croco")]
+CROCO = Path(__import__("os").environ.get("ROCO_CROCO_ROOT", Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT)) / "third_party/croco"))
+sys.path[:0] = [str(ROOT), str(CROCO)]
 from tests.test_care import tiny, pair, TINY_ARGS, H, W  # noqa: E402
 from track2.mono import MonoConfig, install_mono, mono_disabled, mono_parameters  # noqa: E402
 from track2.care import CAREConfig, install_care, care_keydrop, care_parameters  # noqa: E402

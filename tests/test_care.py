@@ -10,8 +10,8 @@ import pytest
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
-WORK = Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT))   # checkpoints/, outputs/, third_party/croco live here
-sys.path[:0] = [str(ROOT), str(WORK / "third_party/croco")]
+CROCO = Path(__import__("os").environ.get("ROCO_CROCO_ROOT", Path(__import__("os").environ.get("ROCO_TRACK2_WORK", ROOT)) / "third_party/croco"))
+sys.path[:0] = [str(ROOT), str(CROCO)]
 from models.croco_downstream import CroCoDownstreamBinocular  # noqa: E402
 from models.head_downstream import PixelwiseTaskWithDPT  # noqa: E402
 from track2.care import (full_attention_epi_loss, full_attention_consistency, agreement_stats, snapshot_cache, CAREConfig, install_care, care_disabled, care_recording, attention_stats, token_targets,  # noqa: E402
