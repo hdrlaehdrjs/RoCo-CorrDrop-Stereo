@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Spring / RobustSpring stereo submission for one CroCo checkpoint (Track 2).
 
-Official format (roco-spring-devkit README + spring-benchmark.org submission page, checked 2026-09-18):
+Official format (roco-spring-devkit README + spring-benchmark.org submission page):
   raw predictions   <root>/<condition>/test/<scene>/disp1_{left,right}/disp1_{left,right}_XXXX.dsp5
                     condition in {clean} + 20 RobustSpring corruptions; dsp5 = HDF5 dataset "disparity",
                     float32 H x W (1080 x 1920), gzip (flow_IO.writeDsp5File). The official disp1 tools read BOTH

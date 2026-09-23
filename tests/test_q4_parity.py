@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT))
 from track2 import q4_primitives as q4  # noqa: E402
 from track2.s2aug import transport_left_to_right  # noqa: E402
 
-PINNED = {  # sha256 at the start of Track 2 work (2026-09-16)
+PINNED = {  # sha256 of the Track 3 sources the primitives were copied from
     "scripts/corresguard_core.py": "a036d52d26cf25f7a4d4ded2ef80f74bf25d1ae4eea115f59407aadcb71d95c2",
     "scripts/visibility_consistency_core.py": "c6fc08ecc7ab07476507de2b3466acb2de77ef18ead1f069167efb446f0d3a1d",
     "scripts/paper_ablation_aug.py": "ddd452c7b574e2aa45ee484831f4621b07b9d5a61547de3a83ba43b8f35feba7",

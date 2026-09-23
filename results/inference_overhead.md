@@ -15,8 +15,7 @@ iterations, 100 timed tile forwards per arm (5 alternating blocks of 20), 20 tim
 | full 1080p frame, median (mean +- sd) | 6.92 s (6.73 +- 0.45) | 7.14 s (7.13 +- 0.52) | +3.3 % median (+6.0 % mean) |
 | peak CUDA memory per tile | 2410 MiB | 2412 MiB | +2 MiB |
 
-**Caveat:** GPU 3 was shared with a foreign process (about 3.2 GB, ~100 % utilisation)
+**Caveat:** the GPU was shared with a foreign process (about 3.2 GB, ~100 % utilisation)
 during the measurement, which is why the per-tile sd is ~20 % of the mean. The two arms were interleaved so that the
 contention affects both equally; the *relative* overhead (roughly +3 to +9 %) is the reportable quantity, the absolute
-milliseconds are upper bounds. Safe paper wording: "the monocular head adds 4.7 % parameters and about 3-9 % inference
-time; peak memory is unchanged".
+milliseconds are upper bounds.

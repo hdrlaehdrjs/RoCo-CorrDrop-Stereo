@@ -24,14 +24,14 @@ Why:
 - **snow 0047:0222** replaces the automatic pick (0045:0164) ONLY for scene diversity: the automatic snow pick is the
   same scene and almost the same view as the frost row. 0047:0222 is rank 2 of 28 by E0 snow drift; its reduction
   (−98 %) is higher than the dataset-level snow reduction (−91 % overall, −93 % in sky), so this row is on the favourable
-  side of typical — say "representative examples", not "typical", if only this figure is cited. The rank-1 snow frame
+  side of typical. The rank-1 snow frame
   (0045:0197) was not used for the same scene-duplication reason. The worst fog frame (0038:0001, E0 141.7 → Full 44.1 px)
   was not used because it is an outlier; it is listed in `qualitative/candidates_ranked.csv`.
 - Dataset-level numbers that the figure illustrates (`regional_summary.json`): sky |Δd| E0 → Full: fog 50.9 → 12.0,
   frost 21.4 → 2.2, snow 11.2 → 0.8 px (mean over the 28 frames).
 
-Ranked candidate lists (top-6 per corruption) are printed by the `candidates` command; contact sheets:
-`candidates_fog.png`, `candidates_frost.png`, `candidates_snow.png` in this folder.
+Ranked candidate lists (top-6 per corruption) and contact sheets (`candidates_{fog,frost,snow}.png`) are produced by the
+`candidates` command of the figure script.
 
 ## Source files
 - Predictions (cached by `scripts/final_analysis.py predict`, tiled inference 352x704 / overlap 0.7, fp32):
@@ -54,4 +54,3 @@ Inset means are computed on the unclipped maps. Images are shown at half resolut
 - Local synthetic corruptions (ImageNet-C style re-implementation + depth-aware fog), not RobustSpring test images.
 - One training seed of Full (2026); seed spread of fog drift is large (4.64 ± 1.79 px over 3 seeds).
 - Drift is not error: a small drift does not by itself mean a correct disparity.
-- No predictions were recomputed for this figure.
