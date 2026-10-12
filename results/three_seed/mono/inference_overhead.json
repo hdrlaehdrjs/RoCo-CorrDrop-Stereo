@@ -1,0 +1,87 @@
+{
+ "measured": "2026-10-08",
+ "checkpoint": "full model, seed 2026",
+ "checkpoint_sha256": "0191e23da06423127e03e3b9243ac6e5a78219c71dc535363678e73884a831c5",
+ "device": "NVIDIA L40S",
+ "precision": "fp32",
+ "batch": 1,
+ "tile": [
+  352,
+  704
+ ],
+ "frame": [
+  1080,
+  1920
+ ],
+ "overlap": 0.7,
+ "tiles_per_frame": 56,
+ "protocol": "alternating blocks (order swapped every block); tile 10x30 timed per path, 30 warm-up; frame 6x5 per path; cuda.synchronize around each call; random inputs shared by both paths",
+ "per_tile": {
+  "stereo_only": {
+   "mean_ms": 57.955011817005776,
+   "median_ms": 57.96532845124602,
+   "std_ms": 0.16480310984146013,
+   "p95_ms": 58.16031848080456,
+   "min_ms": 57.52527108415961,
+   "n": 300
+  },
+  "full": {
+   "mean_ms": 61.90031702319781,
+   "median_ms": 61.91088445484638,
+   "std_ms": 0.16618840675465205,
+   "p95_ms": 62.15297463349998,
+   "min_ms": 61.55835697427392,
+   "n": 300
+  }
+ },
+ "full_frame_1080p_tiled": {
+  "stereo_only": {
+   "mean_ms": 3235.341413039714,
+   "median_ms": 3237.3012895695865,
+   "std_ms": 10.699147310469053,
+   "p95_ms": 3248.593404656276,
+   "min_ms": 3215.5040078796446,
+   "n": 30
+  },
+  "full": {
+   "mean_ms": 3464.946791607266,
+   "median_ms": 3465.7276605721563,
+   "std_ms": 11.506469551896211,
+   "p95_ms": 3480.0720250001177,
+   "min_ms": 3445.593982003629,
+   "n": 30
+  }
+ },
+ "overhead_percent": {
+  "per_tile_mean": 6.807530673359907,
+  "per_tile_median": 6.806751741118688,
+  "per_tile_min": 7.010981111612491,
+  "full_frame_mean": 7.096789774400647,
+  "full_frame_median": 7.0560738890305785,
+  "full_frame_min": 7.155642585428135
+ },
+ "peak_cuda_mem_mib_per_tile": {
+  "stereo_only": 2410.0146484375,
+  "full": 2412.0146484375
+ },
+ "parameters": {
+  "full": 457853365,
+  "mono_and_fuser": 20435475,
+  "stereo_only": 437417890,
+  "increase_percent": 4.671842525690936
+ },
+ "gpu_state": {
+  "other_compute_processes_before": 0,
+  "other_compute_processes_after": 0,
+  "other_compute_memory_mib_before": 0,
+  "memory_used_mib_before_load": "0",
+  "utilization_before_percent": "0",
+  "utilization_during_percent": {
+   "mean": 99.63537906137184,
+   "min": 7,
+   "max": 100,
+   "note": "includes this benchmark itself"
+  }
+ },
+ "fused_vs_stereo_tile_max_abs_diff_px": 0.035552978515625
+}

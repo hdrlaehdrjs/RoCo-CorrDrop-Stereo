@@ -1,0 +1,5 @@
+# Attention supervision + correspondence dropout (exploratory variant): track2_croco_x6b_x4_corrdrop with the attention
+# supervision of track2_croco_x5b_x4_attnsup_weak. Queries under correspondence dropout are excluded from the attention losses.
+inherit: track2_croco_x6b_x4_corrdrop
+name: track2_croco_x9_x6b_attnsup
+attn_sup: {blocks: [7, 11], lambda_epi: 1.5512949816706108, lambda_cons: 113.8055}

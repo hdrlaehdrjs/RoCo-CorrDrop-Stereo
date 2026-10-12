@@ -1,0 +1,4 @@
+# Seed 2028 of track2_e0_croco_clean (clean-only baseline); identical to it except the seed.
+inherit: track2_e0_croco_clean
+name: track2_e0_croco_clean_s2028
+seed: 2028

@@ -1,0 +1,516 @@
+{
+ "variants": {
+  "full": {
+   "label": "Full model",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x7_x6b_mono",
+     "train": "track2_croco_x7_x6b_mono/stageC_seed2026",
+     "eval": "eval/r20_croco_X7"
+    },
+    "2027": {
+     "config": "track2_croco_abl_seed2",
+     "train": "track2_croco_abl_seed2/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLseed2"
+    },
+    "2028": {
+     "config": "track2_croco_abl_seed3",
+     "train": "track2_croco_abl_seed3/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLseed3"
+    }
+   }
+  },
+  "no_dropout": {
+   "label": "- correspondence dropout",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_abl_no_dropout",
+     "train": "track2_croco_abl_no_dropout/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLnodropout"
+    },
+    "2027": {
+     "config": "track2_croco_abl_no_dropout_seed2",
+     "train": "final_runs/no_dropout_seed2/train",
+     "eval": "final_runs/no_dropout_seed2/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_abl_no_dropout_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a1_no_dropout_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a1_no_dropout_s2028/eval/robust20"
+    }
+   }
+  },
+  "randkey": {
+   "label": "Random-key dropout",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_abl_randkey_s1",
+     "train": "final_runs/randkey_seed2026/train",
+     "eval": "final_runs/randkey_seed2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_abl_randkey_s2",
+     "train": "final_runs/randkey_seed2027/train",
+     "eval": "final_runs/randkey_seed2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_abl_randkey_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a2_randkey_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a2_randkey_s2028/eval/robust20"
+    }
+   }
+  },
+  "no_delta": {
+   "label": "- L_delta",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_abl_no_delta",
+     "train": "track2_croco_abl_no_delta/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLnodelta"
+    },
+    "2027": {
+     "config": "track2_croco_abl_no_delta_seed2",
+     "train": "final_runs/no_ldelta_seed2/train",
+     "eval": "final_runs/no_ldelta_seed2/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_abl_no_delta_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a3_no_delta_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a3_no_delta_s2028/eval/robust20"
+    }
+   }
+  },
+  "image_plane": {
+   "label": "Image-plane mask transport",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_abl_image_plane",
+     "train": "track2_croco_abl_image_plane/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLimageplane"
+    },
+    "2027": {
+     "config": "track2_croco_abl_image_plane_seed2",
+     "train": "final_runs/image_plane_seed2027/train",
+     "eval": "final_runs/image_plane_seed2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_abl_image_plane_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a4_image_plane_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a4_image_plane_s2028/eval/robust20"
+    }
+   }
+  },
+  "no_teacher": {
+   "label": "- teacher / anchor",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_abl_no_teacher",
+     "train": "track2_croco_abl_no_teacher/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLnoteacher"
+    },
+    "2027": {
+     "config": "track2_croco_abl_no_teacher_seed2",
+     "train": "final_runs/no_teacher_seed2027/train",
+     "eval": "final_runs/no_teacher_seed2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_abl_no_teacher_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a5_no_teacher_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a5_no_teacher_s2028/eval/robust20"
+    }
+   }
+  },
+  "no_mono": {
+   "label": "- monocular branch (= '+ corr. dropout + overlays')",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x6b_x4_corrdrop",
+     "train": "track2_croco_x6b_x4_corrdrop/stageC_seed2026",
+     "eval": "eval/r20_croco_X6b"
+    },
+    "2027": {
+     "config": "track2_croco_abl_no_mono_seed2",
+     "train": "track2_croco_abl_no_mono_seed2/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLnomonoS2"
+    },
+    "2028": {
+     "config": "track2_croco_abl_no_mono_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a6_no_mono_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a6_no_mono_s2028/eval/robust20"
+    }
+   }
+  },
+  "no_overlay": {
+   "label": "- sensor overlays",
+   "group": "ablation",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_abl_no_overlay",
+     "train": "track2_croco_abl_no_overlay/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLnooverlay"
+    },
+    "2027": {
+     "config": "track2_croco_abl_no_overlay_seed2",
+     "train": "track2_croco_abl_no_overlay_seed2/stageC_seed2026",
+     "eval": "eval/r20_croco_ABLnooverlayS2"
+    },
+    "2028": {
+     "config": "track2_croco_abl_no_overlay_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/a7_no_overlay_s2028_retry1/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/a7_no_overlay_s2028_retry1/eval/robust20"
+    }
+   }
+  },
+  "cm_p000": {
+   "label": "CorrMask p_mask = 0",
+   "group": "corrmask",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_cm_p000_s2026",
+     "train": "camera_ready_ablation_202610/runs/cm_p000_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/cm_p000_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_cm_p000_s2027",
+     "train": "camera_ready_ablation_202610/runs/cm_p000_s2027/train",
+     "eval": "camera_ready_ablation_202610/runs/cm_p000_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_cm_p000_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_cm_p000_s2028_retry1/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_cm_p000_s2028_retry1/eval/robust20"
+    }
+   },
+   "factor": [
+    "s2aug.p_mask",
+    0.0
+   ]
+  },
+  "cm_p010": {
+   "label": "CorrMask p_mask = 0.10",
+   "group": "corrmask",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_cm_p010_s2026",
+     "train": "camera_ready_ablation_202610/runs/cm_p010_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/cm_p010_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_cm_p010_s2027",
+     "train": "camera_ready_ablation_202610/runs/cm_p010_s2027/train",
+     "eval": "camera_ready_ablation_202610/runs/cm_p010_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_cm_p010_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_cm_p010_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_cm_p010_s2028/eval/robust20"
+    }
+   },
+   "factor": [
+    "s2aug.p_mask",
+    0.1
+   ]
+  },
+  "cm_p050": {
+   "label": "CorrMask p_mask = 0.50",
+   "group": "corrmask",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_cm_p050_s2026",
+     "train": "camera_ready_ablation_202610/runs/cm_p050_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/cm_p050_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_cm_p050_s2027",
+     "train": "camera_ready_ablation_202610/runs/cm_p050_s2027/train",
+     "eval": "camera_ready_ablation_202610/runs/cm_p050_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_cm_p050_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_cm_p050_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_cm_p050_s2028/eval/robust20"
+    }
+   },
+   "factor": [
+    "s2aug.p_mask",
+    0.5
+   ]
+  },
+  "ld050": {
+   "label": "lambda_delta = 0.5",
+   "group": "loss",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_ld050_s2026",
+     "train": "camera_ready_ablation_202610/runs/ld050_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/ld050_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_ld050_s2027",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_ld050_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_ld050_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_ld050_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_ld050_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_ld050_s2028/eval/robust20"
+    }
+   },
+   "factor": [
+    "loss.lambda_delta",
+    0.5
+   ]
+  },
+  "ld200": {
+   "label": "lambda_delta = 2.0",
+   "group": "loss",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_ld200_s2026",
+     "train": "camera_ready_ablation_202610/runs/ld200_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/ld200_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_ld200_s2027",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_ld200_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_ld200_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_ld200_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_ld200_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_ld200_s2028/eval/robust20"
+    }
+   },
+   "factor": [
+    "loss.lambda_delta",
+    2.0
+   ]
+  },
+  "lc0125": {
+   "label": "lambda_corr = 0.125",
+   "group": "loss",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_lc0125_s2026",
+     "train": "camera_ready_ablation_202610/runs/lc0125_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/lc0125_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_lc0125_s2027",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_lc0125_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_lc0125_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_lc0125_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_lc0125_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_lc0125_s2028/eval/robust20"
+    }
+   },
+   "factor": [
+    "loss.lambda_corr",
+    0.125
+   ]
+  },
+  "lc050": {
+   "label": "lambda_corr = 0.5",
+   "group": "loss",
+   "one_factor_ablation_of_full": true,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_lc050_s2026",
+     "train": "camera_ready_ablation_202610/runs/lc050_s2026/train",
+     "eval": "camera_ready_ablation_202610/runs/lc050_s2026/eval/robust20"
+    },
+    "2027": {
+     "config": "track2_croco_lc050_s2027",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_lc050_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_lc050_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_lc050_s2028",
+     "train": "camera_ready_3seed_202610/stage1/runs/b_lc050_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage1/runs/b_lc050_s2028/eval/robust20"
+    }
+   },
+   "factor": [
+    "loss.lambda_corr",
+    0.5
+   ]
+  },
+  "e0": {
+   "label": "Clean-only baseline",
+   "group": "staged",
+   "one_factor_ablation_of_full": false,
+   "seeds": {
+    "2026": {
+     "config": "track2_e0_croco_clean",
+     "train": "track2_e0_croco_clean/stageC_seed2026",
+     "eval": "eval/r20_croco_E0"
+    },
+    "2027": {
+     "config": "track2_e0_croco_clean_s2027",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_e0_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_e0_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_e0_croco_clean_s2028",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_e0_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_e0_s2028/eval/robust20"
+    }
+   }
+  },
+  "x4": {
+   "label": "Clean-corrupted consistency",
+   "group": "staged",
+   "one_factor_ablation_of_full": false,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x4_robust_from_start",
+     "train": "track2_croco_x4_robust_from_start/stageC_seed2026",
+     "eval": "eval/r20_croco_X4"
+    },
+    "2027": {
+     "config": "track2_croco_x4_robust_from_start_s2027",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x4_consistency_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x4_consistency_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_x4_robust_from_start_s2028",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x4_consistency_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x4_consistency_s2028/eval/robust20"
+    }
+   }
+  },
+  "x2": {
+   "label": "Short robust fine-tuning",
+   "group": "staged",
+   "one_factor_ablation_of_full": false,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x2_e4_fix",
+     "train": "rejected_runs/track2_croco_x2_e4_fix/stageC_seed2026",
+     "eval": "eval/r20_croco_X2"
+    },
+    "2027": {
+     "config": "track2_croco_x2_e4_fix_s2027",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x2_short_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x2_short_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_x2_e4_fix_s2028",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x2_short_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x2_short_s2028/eval/robust20"
+    }
+   }
+  },
+  "x6a": {
+   "label": "Reliability gating",
+   "group": "staged",
+   "one_factor_ablation_of_full": false,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x6a_x4_fallback",
+     "train": "rejected_runs/track2_croco_x6a_x4_fallback/stageC_seed2026",
+     "eval": "eval/r20_croco_X6a"
+    },
+    "2027": {
+     "config": "track2_croco_x6a_x4_fallback_s2027",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x6a_gating_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x6a_gating_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_x6a_x4_fallback_s2028",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x6a_gating_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x6a_gating_s2028/eval/robust20"
+    }
+   }
+  },
+  "x5b": {
+   "label": "Attention supervision",
+   "group": "staged",
+   "one_factor_ablation_of_full": false,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x5b_x4_attnsup_weak",
+     "train": "rejected_runs/track2_croco_x5b_x4_attnsup_weak/stageC_seed2026",
+     "eval": "eval/r20_croco_X5b"
+    },
+    "2027": {
+     "config": "track2_croco_x5b_x4_attnsup_weak_s2027",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x5b_attnsup_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x5b_attnsup_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_x5b_x4_attnsup_weak_s2028",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x5b_attnsup_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x5b_attnsup_s2028/eval/robust20"
+    }
+   }
+  },
+  "x9": {
+   "label": "Attention supervision + corr. dropout",
+   "group": "staged",
+   "one_factor_ablation_of_full": false,
+   "seeds": {
+    "2026": {
+     "config": "track2_croco_x9_x6b_attnsup",
+     "train": "rejected_runs/track2_croco_x9_x6b_attnsup/stageC_seed2026",
+     "eval": "eval/r20_croco_X9"
+    },
+    "2027": {
+     "config": "track2_croco_x9_x6b_attnsup_s2027",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x9_attnsup_drop_s2027/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x9_attnsup_drop_s2027/eval/robust20"
+    },
+    "2028": {
+     "config": "track2_croco_x9_x6b_attnsup_s2028",
+     "train": "camera_ready_3seed_202610/stage2/runs/s2_x9_attnsup_drop_s2028/train",
+     "eval": "camera_ready_3seed_202610/stage2/runs/s2_x9_attnsup_drop_s2028/eval/robust20"
+    }
+   }
+  }
+ },
+ "repetitions": [
+  {
+   "variant": "no_teacher",
+   "seed": 2028,
+   "config": "track2_croco_abl_no_teacher_s2028",
+   "train": "camera_ready_3seed_202610/stage_controls/runs/ctrl_a5_no_teacher_s2028_rerun1/train",
+   "eval": "camera_ready_3seed_202610/stage_controls/runs/ctrl_a5_no_teacher_s2028_rerun1/eval/robust20",
+   "note": "independent repetition of the seed-2028 run with the same configuration; reported next to it, not averaged"
+  }
+ ],
+ "aborted": [
+  {
+   "run": "camera_ready_3seed_202610/stage1/runs/a7_no_overlay_s2028",
+   "repeated_as": "camera_ready_3seed_202610/stage1/runs/a7_no_overlay_s2028_retry1",
+   "note": "stopped with a non-finite prediction; kept unchanged and repeated from scratch with the same configuration"
+  },
+  {
+   "run": "camera_ready_3seed_202610/stage1/runs/b_cm_p000_s2028",
+   "repeated_as": "camera_ready_3seed_202610/stage1/runs/b_cm_p000_s2028_retry1",
+   "note": "stopped with a non-finite prediction; kept unchanged and repeated from scratch with the same configuration"
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+# Sensitivity run, seed 2028: the full model (track2_croco_final_base) with loss.lambda_delta = 2.0 (default 1.0).
+inherit: track2_croco_final_base
+name: track2_croco_ld200_s2028
+seed: 2028
+loss:
+  lambda_delta: 2.0

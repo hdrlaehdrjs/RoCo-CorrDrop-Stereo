@@ -1,0 +1,4 @@
+# Seed 2028 of track2_croco_x6a_x4_fallback (reliability gating); identical to it except the seed.
+inherit: track2_croco_x6a_x4_fallback
+name: track2_croco_x6a_x4_fallback_s2028
+seed: 2028

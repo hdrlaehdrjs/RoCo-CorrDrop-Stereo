@@ -1,0 +1,8 @@
+# Reliability gating (exploratory variant): the correspondence-dropout configuration (track2_croco_x6b_x4_corrdrop) with a
+# reliability-gated fallback on every decoder cross-attention:
+#   y = g * CA(x) + (1 - g) * m,   g = sigmoid(MLP(5 attention statistics) + 5),   m = learned no-correspondence embedding.
+# Zero-initialised MLP output layer and m: near-identity at initialisation (g = 0.993). The gate / m parameters
+# (5 tensors per block, ~0.05 M in total) train at 100 x the base learning rate without weight decay.
+inherit: track2_croco_x6b_x4_corrdrop
+name: track2_croco_x6a_x4_fallback
+care: {variant: fallback, gate_hidden: 16, fallback_bias_init: 5.0, lr_scale: 100}

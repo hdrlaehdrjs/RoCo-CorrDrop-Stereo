@@ -1,0 +1,6 @@
+# Sensitivity run, seed 2028: the full model (track2_croco_final_base) with s2aug.p_mask = 0.0 (default 0.25).
+inherit: track2_croco_final_base
+name: track2_croco_cm_p000_s2028
+seed: 2028
+s2aug:
+  p_mask: 0.0

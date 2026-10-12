@@ -1,0 +1,4 @@
+# Seed 2028 of track2_croco_x2_e4_fix (short robust fine-tuning); identical to it except the seed.
+inherit: track2_croco_x2_e4_fix
+name: track2_croco_x2_e4_fix_s2028
+seed: 2028

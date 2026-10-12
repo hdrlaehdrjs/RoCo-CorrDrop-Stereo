@@ -1,0 +1,4 @@
+# Seed 2027 of track2_croco_x9_x6b_attnsup (attention supervision + correspondence dropout); identical to it except the seed.
+inherit: track2_croco_x9_x6b_attnsup
+name: track2_croco_x9_x6b_attnsup_s2027
+seed: 2027

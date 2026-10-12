@@ -1,0 +1,4 @@
+# Seed 2028 of track2_croco_abl_no_mono (no monocular branch); identical to it except the seed.
+inherit: track2_croco_abl_no_mono
+name: track2_croco_abl_no_mono_s2028
+seed: 2028

@@ -25,6 +25,8 @@ def load_config(name_or_path: str, overrides: list[str] | None = None) -> dict:
     p = Path(name_or_path)
     if not p.suffix:
         p = CONFIG_DIR / f"{name_or_path}.yaml"
+        if not p.exists():      # seed repetitions and sensitivity settings live in sub-folders (configs/track2/seeds, sensitivity)
+            p = next(CONFIG_DIR.rglob(f"{name_or_path}.yaml"), p)
     raw = yaml.safe_load(p.read_text()) or {}
     parent = raw.pop("inherit", None)
     cfg = _merge(load_config(parent), raw) if parent else raw

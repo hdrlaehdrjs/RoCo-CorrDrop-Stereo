@@ -1,0 +1,7 @@
+# Attention supervision (exploratory variant): the consistency stage (track2_croco_x4_robust_from_start) with weak
+# attention-level correspondence supervision on the cross-attention of decoder blocks 7 and 11. The two weights were set
+# by a gradient-norm calibration to about 5 % of the disparity gradient each. micro_batch 1 keeps the effective batch size.
+inherit: track2_croco_x4_robust_from_start
+name: track2_croco_x5b_x4_attnsup_weak
+micro_batch: 1
+attn_sup: {blocks: [7, 11], lambda_epi: 1.5512949816706108, lambda_cons: 113.8055}

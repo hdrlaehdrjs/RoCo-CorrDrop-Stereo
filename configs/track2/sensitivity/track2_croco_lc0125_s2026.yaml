@@ -1,0 +1,6 @@
+# Sensitivity run, seed 2026: the full model (track2_croco_final_base) with loss.lambda_corr = 0.125 (default 0.25).
+inherit: track2_croco_final_base
+name: track2_croco_lc0125_s2026
+seed: 2026
+loss:
+  lambda_corr: 0.125

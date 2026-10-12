@@ -1,0 +1,157 @@
+% ---------- Table 1: primary 28-frame local results, three training runs per method
+\begin{tabular}{lccccccc}
+\toprule
+Method & Abs & D1 & $\Delta$Abs & Fog & Frost & Snow & M.\ blur \\
+\midrule
+Clean-only baseline & 0.284 & 0.567 & $1.658\pm0.486$ & 13.98 & 5.50 & 3.20 & 1.56 \\
+Clean--corrupted consistency & \textbf{0.283} & \textbf{0.554} & $1.244\pm0.440$ & 9.94 & 5.16 & 1.32 & 1.71 \\
++ corr.\ dropout + overlays & 0.286 & 0.555 & $0.694\pm0.070$ & 5.00 & 1.03 & 0.63 & 0.70 \\
+Full model & 0.287 & 0.558 & $\mathbf{0.670\pm0.107}$ & \textbf{4.64} & \textbf{0.92} & \textbf{0.59} & \textbf{0.69} \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 2: ablations, three seeds; last column = mean matched-seed difference to the full model
+\begin{tabular}{lcccc}
+\toprule
+Variant & Seeds & Clean Abs & $\Delta$Abs (20) & $\Delta$ vs.\ Full \\
+\midrule
+Full model & 3 & 0.287 & $0.670\pm0.107$ & -- \\
+$-$ correspondence dropout & 3 & 0.289 & $0.893\pm0.054$ & $+0.223$ \\
+Random-key dropout & 3 & 0.287 & $1.177\pm0.180$ & $+0.508$ \\
+$-\,\mathcal{L}_\Delta$ & 3 & 0.281 & $0.924\pm0.073$ & $+0.255$ \\
+Image-plane mask transport & 3 & 0.291 & $0.827\pm0.074$ & $+0.157$ \\
+$-$ teacher / anchor & 3 & 0.306 & $1.007\pm0.321$ & $+0.338$ \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 5: clean-only baseline, mean over three training runs
+\begin{tabular}{lc@{\qquad}lc}
+\toprule
+Corruption & $\Delta$Abs $\downarrow$ & Corruption & $\Delta$Abs $\downarrow$ \\
+\midrule
+Fog & 13.98 & Motion blur & 1.56 \\
+Frost & 5.50 & Elastic & 1.12 \\
+Snow & 3.20 & Spatter & 1.12 \\
+Zoom blur & 1.61 & Mean (20) & 1.658 \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 6: individual runs (same position = same seed)
+\begin{tabular}{lcc}
+\toprule
+Variant & Individual runs & Mean $\pm$ sd \\
+\midrule
+Full & 0.656 / 0.783 / 0.570 & $0.670\pm0.107$ \\
+$-$ correspondence dropout & 0.894 / 0.839 / 0.946 & $0.893\pm0.054$ \\
+Random-key dropout & 1.385 / 1.061 / 1.087 & $1.177\pm0.180$ \\
+$-\,\mathcal{L}_\Delta$ & 0.949 / 0.981 / 0.842 & $0.924\pm0.073$ \\
+$-$ monocular branch & 0.766 / 0.688 / 0.627 & $0.694\pm0.070$ \\
+$-$ sensor overlays & 0.774 / 0.658 / 0.867 & $0.766\pm0.105$ \\
+Image-plane mask transport & 0.858 / 0.880 / 0.742 & $0.827\pm0.074$ \\
+$-$ teacher / anchor & 0.921 / 0.738 / 1.363 & $1.007\pm0.321$ \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 7: mean sky-region drift (px), three-run means; reduction from the unrounded means
+\begin{tabular}{lccc}
+\toprule
+Corruption & Clean-only & Full & Reduction \\
+\midrule
+Fog & 41.8 & 13.0 & 69\% \\
+Frost & 11.2 & 1.6 & 85\% \\
+Snow & 5.8 & 0.9 & 85\% \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 8: held-out corruptions, three-run means
+\begin{tabular}{lcccc}
+\toprule
+Corruption & Clean-only & Consistency & + Corr.\ dropout + overlays & Full \\
+\midrule
+Fog & 13.98 & 9.94 & 5.00 & \textbf{4.64} \\
+Frost & 5.50 & 5.16 & 1.03 & \textbf{0.92} \\
+Speckle & 0.74 & \textbf{0.38} & 0.41 & 0.42 \\
+Zoom blur & 1.61 & \textbf{1.60} & \textbf{1.60} & 1.62 \\
+Elastic & 1.12 & \textbf{1.08} & 1.15 & 1.17 \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 10: additional variants, three training runs each
+\begin{tabular}{lcccc}
+\toprule
+Variant & Clean Abs & Clean D1 & Individual runs & $\Delta$Abs (20) \\
+\midrule
+Short robust fine-tuning & 0.282 & 0.556 & 1.678 / 1.515 / 1.868 & $1.687\pm0.177$ \\
+Reliability gating & 0.286 & 0.559 & 1.074 / 0.786 / 0.800 & $0.887\pm0.163$ \\
+Attention supervision & 0.290 & 0.589 & 1.275 / 1.376 / 1.426 & $1.359\pm0.077$ \\
+Attention supervision + corr.\ dropout & 0.289 & 0.603 & 0.927 / 0.998 / 0.973 & $0.966\pm0.036$ \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 11: CorrMask sampling probability; masked samples = observed fraction of all training samples
+\begin{tabular}{lcccc}
+\toprule
+$p_{\mathrm{mask}}$ & Masked samples & Clean Abs & Individual runs & $\Delta$Abs (20) \\
+\midrule
+0 (no CorrMask) & 0.0\% & 0.288 & 0.853 / 0.615 / 0.807 & $0.758\pm0.126$ \\
+0.10 & 7.0\% & 0.287 & 0.946 / 0.778 / 0.703 & $0.809\pm0.125$ \\
+0.25 (default) & 17.1\% & 0.287 & 0.656 / 0.783 / 0.570 & $0.670\pm0.107$ \\
+0.50 & 34.1\% & 0.286 & 0.633 / 0.724 / 0.735 & $0.698\pm0.056$ \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 12: one-factor loss-weight sensitivity; dagger: one lambda_delta = 2 run ended with clean Abs 0.701, the other two 0.292 and 0.294
+\begin{tabular}{lcccc}
+\toprule
+Setting & Clean Abs & Clean D1 & Individual runs & $\Delta$Abs (20) \\
+\midrule
+$\lambda_\Delta=0$ & 0.281 & 0.564 & 0.949 / 0.981 / 0.842 & $0.924\pm0.073$ \\
+$\lambda_\Delta=0.5$ & 0.285 & 0.555 & 0.790 / 0.808 / 0.704 & $0.767\pm0.056$ \\
+$\lambda_\Delta=1$ (default) & 0.287 & 0.558 & 0.656 / 0.783 / 0.570 & $0.670\pm0.107$ \\
+$\lambda_\Delta=2$ & 0.429$^{\dagger}$ & 1.406$^{\dagger}$ & 0.841 / 0.718 / 1.369 & $0.976\pm0.346$ \\
+$\lambda_{\mathrm{corr}}=0.125$ & 0.288 & 0.557 & 0.790 / 0.791 / 0.751 & $0.778\pm0.023$ \\
+$\lambda_{\mathrm{corr}}=0.5$ & 0.287 & 0.558 & 0.786 / 0.767 / 0.708 & $0.754\pm0.041$ \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 13: all corruptions, three-run means
+\begin{tabular}{lcccc}
+\toprule
+Corruption & Clean-only & Consistency & + Corr.\ dropout + overlays & Full \\
+\midrule
+Fog & 13.98 & 9.94 & 5.00 & \textbf{4.64} \\
+Frost & 5.50 & 5.16 & 1.03 & \textbf{0.92} \\
+Snow & 3.20 & 1.32 & 0.63 & \textbf{0.59} \\
+Zoom blur & 1.61 & \textbf{1.60} & \textbf{1.60} & 1.62 \\
+Motion blur & 1.56 & 1.71 & 0.70 & \textbf{0.69} \\
+Elastic & 1.12 & \textbf{1.08} & 1.15 & 1.17 \\
+Spatter & 1.12 & 0.86 & 0.45 & \textbf{0.44} \\
+Gaussian noise & 0.89 & \textbf{0.49} & \textbf{0.49} & \textbf{0.49} \\
+Impulse noise & 0.88 & \textbf{0.44} & 0.49 & 0.46 \\
+Shot noise & 0.86 & \textbf{0.41} & 0.43 & 0.43 \\
+Speckle & 0.74 & \textbf{0.38} & 0.41 & 0.42 \\
+JPEG & 0.38 & 0.30 & 0.30 & \textbf{0.29} \\
+Glass blur & 0.34 & \textbf{0.32} & 0.33 & 0.33 \\
+Defocus blur & 0.26 & \textbf{0.25} & \textbf{0.25} & 0.26 \\
+Gaussian blur & 0.23 & \textbf{0.21} & \textbf{0.21} & 0.22 \\
+Rain & 0.19 & 0.12 & \textbf{0.11} & \textbf{0.11} \\
+Pixelate & 0.14 & 0.14 & \textbf{0.13} & 0.14 \\
+Contrast & \textbf{0.06} & \textbf{0.06} & \textbf{0.06} & \textbf{0.06} \\
+Saturate & \textbf{0.05} & \textbf{0.05} & \textbf{0.05} & \textbf{0.05} \\
+Brightness & \textbf{0.05} & \textbf{0.05} & \textbf{0.05} & \textbf{0.05} \\
+\midrule
+Mean & 1.658 & 1.244 & 0.694 & \textbf{0.670} \\
+\bottomrule
+\end{tabular}
+
+% ---------- Table 15: all 49 local validation frames, three-run means
+\begin{tabular}{lcc}
+\toprule
+Method & Clean Abs & $\Delta$Abs (20) \\
+\midrule
+Clean-only baseline & 10.198 & 12.258 \\
+Clean--corrupted consistency & 10.146 & 8.361 \\
++ Corr.\ dropout + overlays & 10.492 & 6.647 \\
+Full model & 10.433 & \textbf{6.449} \\
+\bottomrule
+\end{tabular}

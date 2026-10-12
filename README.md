@@ -1,8 +1,9 @@
 # RoCo-19 – KoreaU_DLmath · RoCo-Spring Track 2 (stereo) · reproducibility package
 
 Code for the leaderboard entry **RoCo-19-CorrDrop-Stereo** and for every table / figure of the workshop paper.
-The repository contains the final method, the paper ablations and selected development utilities; non-paper variants
-(e.g. the other CARE variants in `track2/care.py`) are disabled by default and not used by the reported model.
+The repository contains the final method, the paper ablations and exploratory variants (three seeds each) and selected
+development utilities; non-paper variants (e.g. the frozen-backbone CARE variants in `track2/care.py`) are disabled by
+default and not used by the reported model.
 
 ## 1. Method in one paragraph
 CroCo-Stereo v2 (ViT-L encoder, ViT-B decoder, DPT head; 437.4 M parameters) is fine-tuned on Spring with a
@@ -28,8 +29,9 @@ transform are never used in training.
 **Inference** uses a single fixed checkpoint containing the stereo network, the monocular head and the fusion module
 (tiles 352×704, overlap 0.7, fp32). The teacher, the image-space corruptions, CorrMask and correspondence dropout are
 training-only. There is no test-time adaptation, corruption detection, ensembling or corruption-specific branch
-switching. The learned fusion is strongly stereo-dominant: measured fusion weights stay ≥ 0.991 on every validation
-pixel (`results/fusion_weights.csv`, `results/mono_stereo_fused_error.csv`).
+switching. The learned fusion is strongly stereo-dominant: over the three full-model checkpoints and all 21 local
+conditions the stereo weight never falls below 0.98, and disabling the monocular module at inference changes the mean
+ΔAbs by less than 10⁻⁴ px (`results/three_seed/mono/`).
 
 ## 2. Layout
 | path | content |
@@ -40,18 +42,25 @@ pixel (`results/fusion_weights.csv`, `results/mono_stereo_fused_error.csv`).
 | `scripts/build_robust20_val.py` | builds the frozen 20-corruption validation cache (severity 3) |
 | `scripts/run_train_eval.sh` | `<gpu> <config> <name>`: train + robust20 evaluation of the final checkpoint |
 | `scripts/make_submission.py`, `run_submission.sh` | test predictions (21 conditions × 1000 frames × 2 views) → official subsampling binaries → the two upload files |
-| `scripts/final_seed_summary.py`, `final_targeted_summary.py` | seed / ablation tables of the paper |
+| `scripts/three_seed/` | the three-seed experiments behind the local tables of the paper: `runs.json` (variant × seed → config and run folder), `check_configs.py`, `summarize.py` (run verification + tables), `regional.py`, `mono_same_checkpoint.py`, `latency.py`, `latex_tables.py` |
+| `scripts/final_seed_summary.py`, `final_targeted_summary.py` | seed / ablation tables at the time of the paper submission (two seeds for most ablations) |
 | `scripts/final_analysis.py`, `analyze_evidence_free.py`, `figures/` | regional (sky / textureless) analysis, fusion weights, latency, qualitative figures |
-| `configs/track2/` | the final configs and their inheritance chain (29 files) |
+| `configs/track2/` | the final configs and their inheritance chain (32 files), `seeds/` (19 seed repetitions), `sensitivity/` (21 CorrMask-probability and loss-weight settings) |
 | `splits/` | scene-disjoint split: 4054 train pairs, 49 validation frames (28 primary: scenes 0038/0039/0045/0047), `track2_train_all.txt` (4103 pairs, submission model), corruption seeds |
 | `tests/` | CPU test suite (`python3 -m pytest -q tests`); `gpu_croco_tiling_parity.py` = optional GPU parity check of the tiled inference |
-| `results/` | every table of the paper as csv/md (`e0_baseline_summary.csv` = clean-only baseline row), regional / fusion-weight / latency analyses, appendix figure, submission bundle hashes |
+| `results/` | every local table of the paper as csv/md (`results/README.md` maps tables to files; `results/three_seed/` = three-seed tables, regional and monocular analyses), appendix figure, submission bundle hashes |
 | `third_party/croco-source.json` | pinned CroCo commit |
 
 Configs: `track2_croco_x7_x6b_mono` = full model (local protocol, seed 2026); `track2_croco_abl_seed2/3` = seeds 2027/2028;
 `track2_croco_final_submit` = leaderboard model (all 4103 pairs, init = official Spring-finetuned CroCo-Stereo);
 `track2_croco_abl_*` = ablations (each differs from the full config only in the ablated key — enforced by a unit test);
-`track2_croco_abl_randkey_s1/s2` = budget-matched random-key dropout control; `track2_e0_croco_clean` = clean-only baseline E0 / teacher.
+`track2_croco_abl_randkey_s1/s2` = budget-matched random-key dropout control; `track2_e0_croco_clean` = clean-only baseline E0 / teacher;
+`track2_croco_x4_robust_from_start` = clean–corrupted consistency stage; `track2_croco_x6b_x4_corrdrop` = `+ corr. dropout + overlays`
+(identical to the no-monocular ablation); `track2_croco_x2_e4_fix` = short robust fine-tuning; `track2_croco_x6a_x4_fallback`,
+`track2_croco_x5b_x4_attnsup_weak`, `track2_croco_x9_x6b_attnsup` = exploratory variants (reliability gating, attention supervision).
+`seeds/*_s2027`, `*_s2028` repeat a recipe with another seed; `sensitivity/` holds the CorrMask-probability (`cm_p*`) and loss-weight
+(`ld*`, `lc*`) settings, each differing from the full model in one coefficient. Configs are found by name in the sub-folders.
+`scripts/three_seed/runs.json` lists the config of every variant and seed.
 
 ## 3. Setup
 Tested with Python 3.11, PyTorch 2.7.1 + CUDA 11.8 on NVIDIA L40S (48 GB). One 48 GB GPU is enough (training peak
@@ -97,13 +106,23 @@ Spring / RobustSpring and the subsampling binaries must be obtained from their p
 ```bash
 python3 -m pytest -q tests                                                       # CPU tests (Track 3-dependent ones skip)
 python3 scripts/build_robust20_val.py                                            # frozen local robust20 cache (49 frames × 20)
-# clean-only baseline E0 = frozen teacher of all robust runs
-CUDA_VISIBLE_DEVICES=0 python3 scripts/train_track2.py --config track2_e0_croco_clean --out outputs/track2/e0
-mkdir -p checkpoints/track2 && cp outputs/track2/e0/final.pt checkpoints/track2/croco_clean_teacher.pt
-# full model / seeds / ablations: train + robust20 evaluation -> outputs/track2/final_runs/<name>/{train,eval}
-scripts/run_train_eval.sh 0 track2_croco_x7_x6b_mono full_seed2026
-scripts/run_train_eval.sh 1 track2_croco_abl_seed2   full_seed2027
-scripts/run_train_eval.sh 2 track2_croco_abl_no_dropout no_dropout_seed2026      # … any track2_croco_abl_* config
+# train + robust20 evaluation of one config -> outputs/track2/final_runs/<name>/{train,eval}; use the config name as run name
+# clean-only baseline, seed 2026 = frozen teacher of all robust runs
+scripts/run_train_eval.sh 0 track2_e0_croco_clean track2_e0_croco_clean
+mkdir -p checkpoints/track2 && cp outputs/track2/final_runs/track2_e0_croco_clean/train/final.pt checkpoints/track2/croco_clean_teacher.pt
+scripts/run_train_eval.sh 0 track2_croco_x7_x6b_mono track2_croco_x7_x6b_mono        # full model, seed 2026
+scripts/run_train_eval.sh 1 track2_croco_abl_seed2 track2_croco_abl_seed2            # full model, seed 2027
+scripts/run_train_eval.sh 2 track2_croco_abl_no_dropout track2_croco_abl_no_dropout  # … any other config
+# all 63 runs of the three-seed tables (the first name printed is the clean-only baseline trained above)
+python3 scripts/three_seed/check_configs.py                                      # consistency of the 63 configs, no run needed
+for c in $(python3 scripts/three_seed/common.py | tail -n +2); do scripts/run_train_eval.sh 0 $c $c; done
+python3 scripts/three_seed/summarize.py                                          # verification + tables -> outputs/track2/three_seed/
+CUDA_VISIBLE_DEVICES=0 python3 scripts/three_seed/regional.py predict e0:2026 full:2026 e0:2027 full:2027 e0:2028 full:2028
+python3 scripts/three_seed/regional.py summarize                                 # sky / textured-region statistics
+for s in 2026 2027 2028; do CUDA_VISIBLE_DEVICES=0 python3 scripts/three_seed/mono_same_checkpoint.py run --seed $s; done
+python3 scripts/three_seed/mono_same_checkpoint.py summarize                     # fused vs stereo-only inference of the same checkpoint
+CUDA_VISIBLE_DEVICES=0 python3 scripts/three_seed/latency.py --gpu-index 0       # inference overhead (use an idle GPU)
+python3 scripts/three_seed/latex_tables.py                                       # LaTeX bodies of the local tables
 # leaderboard model and submission files
 CUDA_VISIBLE_DEVICES=0 python3 scripts/train_track2.py --config track2_croco_final_submit --out outputs/track2/final_submit
 scripts/run_submission.sh outputs/track2/final_submit/final.pt final_x7 "0 1 2 3"
@@ -113,10 +132,17 @@ scripts/run_submission.sh outputs/track2/final_submit/final.pt final_x7 "0 1 2 3
 Upload only those two files (raw predictions are ~250 GB and can be deleted after bundling). `train_track2.py` refuses
 to write into an existing `--out` folder.
 
-**Tables and figures.** The committed files in `results/` are the outputs of the runs above. The summary scripts
-(`scripts/final_seed_summary.py`, `final_targeted_summary.py`) read the evaluation folders listed in their `RUNS`
-tables (our original run names under `outputs/track2/`); adapt `RUNS` to your folder names. The regional /
-fusion-weight / latency analyses and the qualitative figures need model predictions that are not committed:
+Every robust variant, for every seed, uses the seed-2026 clean-only checkpoint as its frozen teacher
+(`checkpoints/track2/croco_clean_teacher.pt`); the short fine-tuning variant also starts from it. The clean-only
+baseline and the consistency stage use `micro_batch: 2` (peak 23–24 GB instead of 17 GB).
+
+**Tables and figures.** The committed files in `results/` are the outputs of the runs above (`results/README.md` maps
+each table of the paper to its file). The scripts in `scripts/three_seed/` look for a run in
+`outputs/track2/final_runs/<config>/` first and otherwise in the folder recorded in `runs.json` (our original run
+names under `outputs/track2/`). The older summary scripts (`scripts/final_seed_summary.py`,
+`final_targeted_summary.py`) read the evaluation folders listed in their `RUNS` tables; adapt `RUNS` to your folder
+names. The seed-2026 regional / fusion-weight analyses and the qualitative figures need model predictions that are not
+committed:
 
     checkpoints (E0 + full model, paths in MODELS of scripts/final_analysis.py)
       -> python3 scripts/final_analysis.py predict      (prediction cache outputs/track2/final_analysis/cache, GPU)
@@ -141,22 +167,34 @@ Robustness columns of the same leaderboard:
 
 See the leaderboard for the per-region breakdown and metric definitions.
 
-Local protocol (28 primary validation frames, 20 corruptions, mean ΔAbs; mean ± sample sd over seeds):
+Local protocol (28 primary validation frames, 20 corruptions, mean ΔAbs; three independently trained runs per variant
+with seeds 2026 / 2027 / 2028; mean ± sample sd):
 
-| variant | seeds | ΔAbs | clean Abs |
+| variant | ΔAbs (individual runs) | ΔAbs | clean Abs |
 |---|---|---|---|
-| clean-only baseline E0 | 1 | 2.195 | 0.281 |
-| **full** | 3 | **0.670 ± 0.107** | 0.287 ± 0.001 |
-| no correspondence dropout | 2 | 0.866 ± 0.039 | 0.286 |
-| random-key dropout (budget-matched control) | 2 | 1.223 ± 0.229 | 0.285 |
-| no L_delta | 2 | 0.965 ± 0.022 | 0.280 |
-| image-plane mask transport | 2 | 0.869 ± 0.016 | 0.289 |
-| no teacher / anchor | 2 | 0.829 ± 0.129 | 0.309 |
-| no mono head | 2 | 0.727 ± 0.055 | 0.284 |
-| no sensor overlay | 2 | 0.716 ± 0.082 | 0.289 |
+| clean-only baseline | 2.195 / 1.531 / 1.247 | 1.658 ± 0.486 | 0.284 |
+| clean–corrupted consistency | 1.487 / 1.508 / 0.736 | 1.244 ± 0.440 | 0.283 |
+| + corr. dropout + overlays (= no monocular branch) | 0.766 / 0.688 / 0.627 | 0.694 ± 0.070 | 0.286 |
+| **full** | 0.656 / 0.783 / 0.570 | **0.670 ± 0.107** | 0.287 |
+| no correspondence dropout | 0.894 / 0.839 / 0.946 | 0.893 ± 0.054 | 0.289 |
+| random-key dropout (budget-matched control) | 1.385 / 1.061 / 1.087 | 1.177 ± 0.180 | 0.287 |
+| no L_delta | 0.949 / 0.981 / 0.842 | 0.924 ± 0.073 | 0.281 |
+| image-plane mask transport | 0.858 / 0.880 / 0.742 | 0.827 ± 0.074 | 0.291 |
+| no teacher / anchor | 0.921 / 0.738 / 1.363 | 1.007 ± 0.321 | 0.306 |
+| no sensor overlay | 0.774 / 0.658 / 0.867 | 0.766 ± 0.105 | 0.288 |
+| CorrMask p_mask = 0 / 0.10 / 0.50 (default 0.25) | – | 0.758 ± 0.126 / 0.809 ± 0.125 / 0.698 ± 0.056 | 0.288 / 0.287 / 0.286 |
+| λ_Δ = 0.5 / 2.0 (default 1.0) | – | 0.767 ± 0.056 / 0.976 ± 0.346 | 0.285 / 0.429 |
+| λ_corr = 0.125 / 0.5 (default 0.25) | – | 0.778 ± 0.023 / 0.754 ± 0.041 | 0.288 / 0.287 |
+| short robust fine-tuning | 1.678 / 1.515 / 1.868 | 1.687 ± 0.177 | 0.282 |
+| reliability gating | 1.074 / 0.786 / 0.800 | 0.887 ± 0.163 | 0.286 |
+| attention supervision | 1.275 / 1.376 / 1.426 | 1.359 ± 0.077 | 0.290 |
+| attention supervision + corr. dropout | 0.927 / 0.998 / 0.973 | 0.966 ± 0.036 | 0.289 |
 
-With 2–3 seeds per variant these are descriptive statistics; no significance is claimed. Details, per-corruption values
-and matched-seed comparisons: `results/`.
+These are descriptive statistics of three runs; no significance is claimed. The clean-only baseline and the
+consistency stage vary strongly between seeds, the full model much less; every full-model run is below every
+clean-only run. One of the three λ_Δ = 2.0 runs became unstable after warm-up (clean Abs 0.701), which explains the
+mean clean Abs of that row. Individual runs, per-corruption values, matched-seed differences, regional statistics and
+the same-checkpoint monocular ablation: `results/three_seed/` (index in `results/README.md`).
 
 ## 6. Declared data, checkpoints and compute
 Training data: Spring train split only (scene-disjoint local split for the paper, all 4103 pairs for the leaderboard
@@ -165,7 +203,10 @@ Spring-finetuned weights for the leaderboard model, which also serve as its froz
 label or leaderboard feedback was used for training or model selection; the same checkpoint and settings produced both
 uploads (`results/BUNDLE_CONTRACT.json`: checkpoint sha256 3e579178…1d42). The local corruption suite is a
 re-implementation (ImageNet-C style + depth-aware fog), not the RobustSpring generator. No git on the training host: every
-run records the sha256 of its sources in `contract.json`. Hardware: NVIDIA L40S (48 GB), ≈ 5 GPU-hours per training run.
+run records the sha256 of its sources in `contract.json`. Hardware: NVIDIA L40S (48 GB), one GPU per run; a full
+training run takes ≈ 5 GPU-hours and peaks at 17 GB, the robust20 evaluation of a checkpoint about one further
+GPU-hour. The 63 local runs behind the three-seed tables took 357 GPU-hours of training in total; training time,
+peak memory and checkpoint hash of every run are listed in `results/three_seed/runs.md`.
 
 ## 7. Licences
 Code written for this repository: CC BY-NC-SA 4.0 (`LICENSE`), matching CroCo / CroCo-Stereo, which it builds on and

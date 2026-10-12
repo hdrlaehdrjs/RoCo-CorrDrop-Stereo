@@ -1,0 +1,4 @@
+# Seed 2028 of track2_croco_abl_image_plane (image-plane mask transport); identical to it except the seed.
+inherit: track2_croco_abl_image_plane
+name: track2_croco_abl_image_plane_s2028
+seed: 2028

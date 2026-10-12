@@ -1,0 +1,4 @@
+# Seed 2028 of track2_croco_x4_robust_from_start (clean-corrupted consistency stage); identical to it except the seed.
+inherit: track2_croco_x4_robust_from_start
+name: track2_croco_x4_robust_from_start_s2028
+seed: 2028

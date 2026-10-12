@@ -1,0 +1,4 @@
+# Seed 2028 of track2_croco_abl_no_teacher (no teacher / anchor); identical to it except the seed.
+inherit: track2_croco_abl_no_teacher
+name: track2_croco_abl_no_teacher_s2028
+seed: 2028
