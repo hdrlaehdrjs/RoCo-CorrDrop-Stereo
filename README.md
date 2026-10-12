@@ -153,8 +153,8 @@ The final appendix figure itself is committed in `results/figures/`.
 
 ## 5. Results
 Official [Spring stereo benchmark](https://spring-benchmark.org/stereo) entry **RoCo-19-CorrDrop-Stereo**
-(model `track2_croco_final_submit`), ranked first on the RoCo-Spring stereo-matching leaderboard by the Robustness
-Score (RbS 0.1176; CroCo reference 0.1456):
+(model `track2_croco_final_submit`), ranked first in Track 2 (Stereo Matching) of the NeurIPS 2026 RoCo-Spring
+challenge by the robustness-balanced Spring score (RbS 0.1176; CroCo reference 0.1456):
 
 | Abs | 1px | D1 |
 |---|---|---|
